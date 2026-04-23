@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RulePack xmlns="xmlns://www.fortifysoftware.com/schema/rules"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="RulePack">
+    <RulePackID>F08BCFC7-FC08-433F-B69E-9CB8D33C558E</RulePackID>
+    <SKU>SKU-F08BCFC7-FC08-433F-B69E-9CB8D33C558E</SKU>
+    <Name><![CDATA[24.4.0_CRE_SQLInjectionRules.xml]]></Name>
+    <Version>1.0</Version>
+    <Description><![CDATA[Description for 24.4.0_CRE_SQLInjectionRules.xml]]></Description>
+    <Rules version="24.4.0">
+        <RuleDefinitions>
+            <DataflowSourceRule formatVersion="24.4.0" language="java">
+                <RuleID>D356DC31-5BC6-448E-896E-DD39C9D9A3B6</RuleID>
+                <FunctionIdentifier>
+                    <NamespaceName>
+                        <Pattern>com.fortify.test.cre.sqlInjectionRule</Pattern>
+                    </NamespaceName>
+                    <ClassName>
+                        <Pattern>Test</Pattern>
+                    </ClassName>
+                    <FunctionName>
+                        <Pattern>function1</Pattern>
+                    </FunctionName>
+                    <ApplyTo implements="true" overrides="true" extends="true"/>
+                </FunctionIdentifier>
+                <OutArguments>return</OutArguments>
+            </DataflowSourceRule>
+            <DataflowSinkRule formatVersion="24.4.0" language="java">
+                <MetaInfo>
+                    <Group name="altcategoryCWE">CWE ID 89</Group>
+                    <Group name="altcategoryOWASP2004">A6 Injection Flaws</Group>
+                    <Group name="altcategoryOWASP2007">A2 Injection Flaws</Group>
+                    <Group name="altcategoryPCI1.1">Requirement 6.5.6</Group>
+                    <Group name="altcategoryPCI1.2">Requirement 6.3.1.1, 6.5.2</Group>
+                    <Group name="altcategorySTIG2">APP3510 CAT I, APP3540.1 CAT, APP3540.3 CAT II</Group>
+                    <Group name="altcategoryWASC24+2">SQL Injection</Group>
+                    <Group name="coveredRTA">Protected</Group>
+                    <Group name="Accuracy">5</Group>
+                    <Group name="Impact">5</Group>
+                    <Group name="RemediationEffort">1</Group>
+                    <Group name="Probability">5</Group>
+                    <Group name="audience">targeted,medium,broad,dev,fod</Group>
+                </MetaInfo>
+                <RuleID>7815660E-04B7-48D0-A7AC-177A16836C4C</RuleID>
+                <VulnKingdom>Input Validation and Representation</VulnKingdom>
+                <VulnCategory>SQL Injection</VulnCategory>
+                <DefaultSeverity>4.0</DefaultSeverity>
+                <Description ref="desc.dataflow.java.sql_injection">
+                    <Explanation append="true"><![CDATA[This issue is being reported by a custom rule.]]></Explanation>
+                </Description>
+                <Sink>
+                    <InArguments>0</InArguments>
+                    <Conditional>
+                        <And>
+                            <Not>
+                                <TaintFlagSet taintFlag="VALIDATED_SQL_INJECTION"/>
+                            </Not>
+                            <Not>
+                                <TaintFlagSet taintFlag="NUMBER"/>
+                            </Not>
+                        </And>
+                    </Conditional>
+                </Sink>
+                <FunctionIdentifier>
+                    <NamespaceName>
+                        <Pattern>com.fortify.test.cre.sqlInjectionRule</Pattern>
+                    </NamespaceName>
+                    <ClassName>
+                        <Pattern>Test</Pattern>
+                    </ClassName>
+                    <FunctionName>
+                        <Pattern>function2</Pattern>
+                    </FunctionName>
+                    <ApplyTo implements="true" overrides="true" extends="true"/>
+                </FunctionIdentifier>
+            </DataflowSinkRule>
+            <DataflowSinkRule formatVersion="24.4.0" language="java">
+                <MetaInfo>
+                    <Group name="altcategoryCWE">CWE ID 566</Group>
+                    <Group name="altcategoryOWASP2004">A2 Broken Access Control</Group>
+                    <Group name="altcategoryOWASP2007">A4 Insecure Direct Object Reference</Group>
+                    <Group name="altcategoryPCI1.1">Requirement 6.5.2</Group>
+                    <Group name="altcategoryPCI1.2">Requirement 6.5.4</Group>
+                    <Group name="altcategorySTIG2">APP3510 CAT I</Group>
+                    <Group name="altcategoryWASC24+2">Insufficient Authorization</Group>
+                    <Group name="coveredRTA">Not Protected</Group>
+                    <Group name="Accuracy">1</Group>
+                    <Group name="Impact">4</Group>
+                    <Group name="RemediationEffort">1</Group>
+                    <Group name="Probability">3</Group>
+                    <Group name="audience">targeted,medium,broad,dev,fod</Group>
+                </MetaInfo>
+                <RuleID>7815660E-04B7-48D0-A7AC-177A16836C4C1</RuleID>
+                <VulnKingdom>Security Features</VulnKingdom>
+                <VulnCategory>Access Control</VulnCategory>
+                <VulnSubcategory>Database</VulnSubcategory>
+                <DefaultSeverity>2.0</DefaultSeverity>
+                <Description ref="desc.dataflow.java.access_control_database">
+                    <Explanation append="true"><![CDATA[This issue is being reported by a custom rule.]]></Explanation>
+                </Description>
+                <Sink>
+                    <InArguments>0</InArguments>
+                    <Conditional>
+                        <And>
+                            <Not>
+                                <TaintFlagSet taintFlag="VALIDATED_ACCESS_CONTROL_DATABASE"/>
+                            </Not>
+                            <TaintFlagSet taintFlag="NUMBER"/>
+                        </And>
+                    </Conditional>
+                </Sink>
+                <FunctionIdentifier>
+                    <NamespaceName>
+                        <Pattern>com.fortify.test.cre.sqlInjectionRule</Pattern>
+                    </NamespaceName>
+                    <ClassName>
+                        <Pattern>Test</Pattern>
+                    </ClassName>
+                    <FunctionName>
+                        <Pattern>function2</Pattern>
+                    </FunctionName>
+                    <ApplyTo implements="true" overrides="true" extends="true"/>
+                </FunctionIdentifier>
+            </DataflowSinkRule>
+            <DataflowCleanseRule formatVersion="24.4.0" language="java">
+                <RuleID>F33E626F-1ECF-4CE6-9328-8C88820F9E6C</RuleID>
+                <TaintFlags>+VALIDATED_SQL_INJECTION</TaintFlags>
+                <FunctionIdentifier>
+                    <NamespaceName>
+                        <Pattern>com.fortify.test.cre.sqlInjectionRule</Pattern>
+                    </NamespaceName>
+                    <ClassName>
+                        <Pattern>Test</Pattern>
+                    </ClassName>
+                    <FunctionName>
+                        <Pattern>fixfunction</Pattern>
+                    </FunctionName>
+                    <ApplyTo implements="true" overrides="true" extends="true"/>
+                </FunctionIdentifier>
+                <OutArguments>return</OutArguments>
+            </DataflowCleanseRule>
+        </RuleDefinitions>
+    </Rules>
+</RulePack>
