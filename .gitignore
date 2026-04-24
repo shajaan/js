@@ -1,0 +1,6 @@
+.fortify/
+.otsetting/
+.otappsec/
+.idea/
+.vscode/
+.project
