@@ -27,15 +27,16 @@ jobs:
           SSC_TOKEN: ${{ secrets.SSC_TOKEN }}
           SC_SAST_TOKEN: ${{ secrets.SC_SAST_TOKEN }}
           SSC_APPVERSION: 00011:githubaction
-          AVIATOR_URL: https://ams.aviator.fortify.com
-          AVIATOR_TOKEN: ${{secrets.AVIATOR_TOKEN}}
+          AVIATOR_URL: https://aviator-qa02.fod-forge.cyberreseng.com
+          AVIATOR_TOKEN: ${{ secrets.AVIATOR_TOKEN }}
           DO_AVIATOR_AUDIT: true
           DO_AVIATOR_REMEDIATIONS: true
+          AVIATOR_APP: TOOLS_TENANT
 
       - name: Upload custom debug artifacts
         if: ${{ steps.scan.conclusion == 'success' && steps.scan.outputs.upload-debug-artifacts == 'true' }}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.DEBUG_ARTIFACT_NAME }}-${{ github.job }}
+          name: custom-fortify-debug-${{ github.job }}
           path: ${{ steps.scan.outputs.debug-artifacts-dir }}
           retention-days: 1
