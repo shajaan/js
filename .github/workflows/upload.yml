@@ -1,0 +1,41 @@
+name: 04 - Test AST Action Without Built-In Artifacts (SSC)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ast-without-artifacts-ssc:
+    runs-on: ubuntu-latest
+    environment: SSC
+    permissions:
+      contents: read
+      security-events: write
+      pull-requests: write
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Run Fortify AST scan (without-artifacts)
+        id: scan
+        uses: fortify/github-action/without-artifacts@fix/pinned-actions
+        with:
+          debug: true
+        env:
+          FCLI_BOOTSTRAP_VERSION: dev_v3.x
+          DEBUG_ARTIFACT_NAME: fortify-debug-artifacts
+          SSC_URL: ${{ secrets.SSC_URL }}
+          SSC_TOKEN: ${{ secrets.SSC_TOKEN }}
+          SC_SAST_TOKEN: ${{ secrets.SC_SAST_TOKEN }}
+          SSC_APPVERSION: 00011:githubaction
+          AVIATOR_URL: https://ams.aviator.fortify.com
+          AVIATOR_TOKEN: ${{secrets.AVIATOR_TOKEN}}
+          DO_AVIATOR_AUDIT: true
+          DO_AVIATOR_REMEDIATIONS: true
+
+      - name: Upload custom debug artifacts
+        if: ${{ steps.scan.conclusion == 'success' && steps.scan.outputs.upload-debug-artifacts == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.DEBUG_ARTIFACT_NAME }}-${{ github.job }}
+          path: ${{ steps.scan.outputs.debug-artifacts-dir }}
+          retention-days: 1
