@@ -25,6 +25,6 @@ jobs:
           SSC_APPVERSION: 00011:githubaction
           AVIATOR_URL: https://aviator-qa02.fod-forge.cyberreseng.com
           AVIATOR_TOKEN: ${{ secrets.AVIATOR_TOKEN }}
-          DO_AVIATOR_AUDIT: true
-          DO_AVIATOR_REMEDIATIONS: true
+          DO_AVIATOR_AUDIT: false
+          DO_AVIATOR_REMEDIATIONS: false
           AVIATOR_APP: TOOLS_TENANT
