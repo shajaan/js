@@ -1,0 +1,31 @@
+name: 02 - Test Default AST Action (SSC)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ast-default-ssc:
+    runs-on: ubuntu-latest
+    environment: SSC
+    permissions:
+      contents: read
+      security-events: write
+      pull-requests: write
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Run Fortify AST scan (default action)
+        uses: fortify/github-action@fix/pinned-actions
+        with:
+          debug: true
+        env:
+          FCLI_BOOTSTRAP_VERSION: dev_v3.x
+          SSC_URL: ${{ secrets.SSC_URL }}
+          SSC_TOKEN: ${{ secrets.SSC_TOKEN }}
+          SC_SAST_TOKEN: ${{ secrets.SC_SAST_TOKEN }}
+          SSC_APPVERSION: 00011:githubaction
+          AVIATOR_URL: https://aviator-qa02.fod-forge.cyberreseng.com
+          AVIATOR_TOKEN: ${{ secrets.AVIATOR_TOKEN }}
+          DO_AVIATOR_AUDIT: true
+          DO_AVIATOR_REMEDIATIONS: true
