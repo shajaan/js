@@ -17,8 +17,6 @@ jobs:
 
       - name: Run Fortify AST scan (default action)
         uses: fortify/github-action@fix/pinned-actions
-        with:
-          debug: true
         env:
           FCLI_BOOTSTRAP_VERSION: dev_v3.x
           SSC_URL: ${{ secrets.SSC_URL }}
