@@ -17,7 +17,7 @@ jobs:
 
       - name: Run Fortify AST scan (without-artifacts)
         id: scan
-        uses: fortify/github-action/without-artifacts@fix/pinned-actions
+        uses: fortify/github-action/without-artifacts@main
         with:
           debug: true
           debug-artifact-password: ${{ secrets.FORTIFY_DEBUG_ARTIFACT_PASSWORD }}
