@@ -20,6 +20,7 @@ jobs:
         uses: fortify/github-action/without-artifacts@fix/pinned-actions
         with:
           debug: true
+          debug-artifact-password: ${{ secrets.FORTIFY_DEBUG_ARTIFACT_PASSWORD }}
         env:
           FCLI_BOOTSTRAP_VERSION: dev_v3.x
           DEBUG_ARTIFACT_NAME: fortify-debug-artifacts
@@ -37,6 +38,6 @@ jobs:
         if: ${{ steps.scan.conclusion == 'success' && steps.scan.outputs.upload-debug-artifacts == 'true' }}
         uses: actions/upload-artifact@v4
         with:
-          name: custom-fortify-debug-${{ github.job }}
+          name: uploadartifacts.7z
           path: ${{ steps.scan.outputs.debug-artifacts-dir }}
           retention-days: 1
