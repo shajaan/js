@@ -5,7 +5,7 @@ on:
 
 jobs:
   ast-default-ssc:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04-arm
     environment: SSC
     permissions:
       contents: read
@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Fortify AST scan (default action)
-        uses: fortify/github-action@fix/pinned-actions
+        uses: fortify/github-action@main
         env:
           FCLI_BOOTSTRAP_VERSION: dev_v3.x
           SSC_URL: ${{ secrets.SSC_URL }}
