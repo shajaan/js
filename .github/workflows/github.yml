@@ -18,7 +18,6 @@ jobs:
       - name: Run Fortify AST scan (default action)
         uses: fortify/github-action@main
         with:
-          debug: true
           debug-artifact-password: ${{ secrets.FORTIFY_DEBUG_ARTIFACT_PASSWORD }}
         env:
           FCLI_BOOTSTRAP_VERSION: dev_v3.x
