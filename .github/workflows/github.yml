@@ -5,7 +5,7 @@ on:
 
 jobs:
   ast-default-ssc:
-    runs-on: ubuntu-22.04-arm
+    runs-on: windows-latest
     environment: SSC
     permissions:
       contents: read
@@ -18,6 +18,7 @@ jobs:
       - name: Run Fortify AST scan (default action)
         uses: fortify/github-action@main
         with:
+          debug: true
           debug-artifact-password: ${{ secrets.FORTIFY_DEBUG_ARTIFACT_PASSWORD }}
         env:
           FCLI_BOOTSTRAP_VERSION: dev_v3.x
